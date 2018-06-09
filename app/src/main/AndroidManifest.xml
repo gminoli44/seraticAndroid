@@ -19,5 +19,6 @@
         <activity android:name=".RegistroActivity" />
         <activity android:name=".ListaActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
