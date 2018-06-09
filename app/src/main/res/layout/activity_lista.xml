@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.android.gersain.votacionapp.ListaActivity">
 
+        <include
+            android:id="@+id/include"
+            layout="@layout/lista"
+            android:layout_width="300dp"
+            android:layout_height="450dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+
+
+
 </android.support.constraint.ConstraintLayout>
