@@ -124,7 +124,6 @@ public class BackgroundTask extends AsyncTask<String,Void,String>{
             }
         }
         else if (method.equals("lista")){
-            Log.d("ff","sdf");
             try {
                 URL url = new URL(lista_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -133,10 +132,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String>{
                 httpURLConnection.setDoInput(true);
 
                 InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"iso-8859-1"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
                 String line ="";
                 StringBuffer jsonData=new StringBuffer();
-                Log.d("asdasd",bufferedReader.toString());
                 while((line = bufferedReader.readLine())!=null){
                     jsonData.append(line+"n");
 

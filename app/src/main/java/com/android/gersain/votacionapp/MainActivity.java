@@ -1,8 +1,10 @@
 package com.android.gersain.votacionapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView idUser, pass;
     Button sesion;
@@ -34,61 +36,32 @@ public class MainActivity extends AppCompatActivity {
         idUser = (TextView)findViewById(R.id.txtUserID);
         pass = (TextView)findViewById(R.id.txtPass);
         sesion = (Button)findViewById(R.id.btnInicioSesion);
-
-      /*  BackgroundTask hilo1 = new BackgroundTask(this);
-        hilo1.execute("lista", "", "");
-        String lista = null;
-        try {
-            lista = hilo1.get();
-            JSONArray ja = new JSONArray(lista);
-            JSONObject jo;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-
-        loadJSON();
+        sesion.setOnClickListener(this);
     }
 
-    private void loadJSON(){
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                .create();
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btnInicioSesion) {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8084/api/usuario/listar")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+            Intent RegistroActivity = new Intent(getApplicationContext(), RegistroActivity.class);
+            startActivity(RegistroActivity);
 
-        RestClient restClient = retrofit.create(RestClient.class);
-        Call<User> call = restClient.getData();
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                switch (response.code()) {
-                    case 200:
-                        User data = response.body();
-                        Log.d("sdasd",data.getNombre());
-                        // view.notifyDataSetChanged(data.getResults());
-                        break;
-                    case 401:
-
-                        break;
-                    default:
-
-                        break;
+         /*  BackgroundTask hilo1 = new BackgroundTask(this);
+            hilo1.execute("login", idUser.getText().toString(), pass.getText().toString());
+            String lista = null;
+            try {
+                lista = hilo1.get();
+                if(!lista.isEmpty()){
+                    Intent RegistroActivity = new Intent(getApplicationContext(), RegistroActivity.class);
+                    startActivity(RegistroActivity);
                 }
-            }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }*/
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e("error", t.toString());
-            }
-        });
+
+        }
     }
 }
